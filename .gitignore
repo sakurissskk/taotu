@@ -1,0 +1,15 @@
+# 构建产物
+android/build/
+android/assets/index.html
+docs/index.html
+dist/
+*.idsig
+
+# 签名密钥：绝不能提交
+android/keys/
+*.jks
+*.keystore
+
+# 系统垃圾
+.DS_Store
+Thumbs.db

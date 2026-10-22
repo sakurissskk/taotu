@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320">
+  <rect width="1200" height="320" fill="#f4ecdf"/>
+  <circle cx="1090" cy="70" r="120" fill="#e9dcc7" opacity="0.7"/>
+  <circle cx="1150" cy="280" r="90" fill="#e3ead9" opacity="0.8"/>
+  <rect x="70" y="70" width="200" height="180" rx="40" fill="#b0603f"/>
+  <rect x="105" y="112" width="130" height="12" rx="6" fill="#fff8f1"/>
+  <rect x="105" y="142" width="130" height="12" rx="6" fill="#fff8f1"/>
+  <rect x="105" y="172" width="80" height="12" rx="6" fill="#fff8f1"/>
+  <circle cx="238" cy="222" r="18" fill="#7c8f6d"/>
+  <text x="320" y="150" font-family="Songti SC, Noto Serif CJK SC, Source Han Serif SC, serif" font-size="72" font-weight="600" fill="#2e2822">陶土词卡</text>
+  <text x="324" y="200" font-family="-apple-system, Segoe UI, Noto Sans CJK SC, sans-serif" font-size="22" letter-spacing="4" fill="#8a6a58">OFFLINE VOCAB · 10,200 WORDS · 8 BOOKS</text>
+  <rect x="322" y="224" width="150" height="40" rx="20" fill="#e3ead9"/>
+  <text x="397" y="251" text-anchor="middle" font-family="-apple-system, Segoe UI, Noto Sans CJK SC, sans-serif" font-size="20" fill="#4c5a42">断网可用</text>
+  <rect x="490" y="224" width="150" height="40" rx="20" fill="#efdccd"/>
+  <text x="565" y="251" text-anchor="middle" font-family="-apple-system, Segoe UI, Noto Sans CJK SC, sans-serif" font-size="20" fill="#7a4327">间隔重复</text>
+</svg>
