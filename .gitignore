@@ -1,7 +1,6 @@
 # 构建产物
 android/build/
 android/assets/index.html
-docs/index.html
 dist/
 *.idsig
 
