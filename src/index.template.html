@@ -14,13 +14,13 @@
 <div class="app">
   <header class="top">
     <div class="brand">陶土词卡<small>OFFLINE VOCAB · 万词离线</small></div>
-    <span class="badge">断网可用</span>
+    <div class="status"><span id="clock">--:--</span><span class="dot">·</span><span id="batt">--</span></div>
   </header>
 
   <section class="page" id="page-home">
     <div class="hero card">
       <div class="hero-txt">
-        <div class="greeting">晚上好，今天读几页</div>
+        <div class="greeting"><span id="greeting">晚上好</span>，今天读几页</div>
         <div class="sub" id="home-hint">按到期顺序开始。</div>
         <div class="row-btns">
           <button class="primary" data-act="nav" data-page="cards">开始复习</button>
@@ -51,6 +51,7 @@
       <input id="lib-search" type="search" placeholder="搜单词、释义、例句，共 1 万多条" autocomplete="off" autocapitalize="off" spellcheck="false">
     </div>
     <div class="chips" id="lib-chips"></div>
+    <div class="letters" id="lib-letters"></div>
     <div class="word-list" id="lib-list"></div>
     <div class="pager" id="lib-page"></div>
   </section>
@@ -58,23 +59,26 @@
   <section class="page" id="page-cards">
     <div class="section-title"><h2>翻卡复习</h2><span class="hint">认识 / 有印象 / 不认识</span></div>
     <div class="chips" id="card-chips"></div>
-    <div class="progress"><div class="bar"><i id="card-bar"></i></div><span id="card-progress">0 / 0</span></div>
+    <div class="progress"><div class="bar"><i id="card-bar"></i></div><span id="card-progress">0 / 15</span></div>
     <div class="cardstage">
+      <button class="star card-star" id="card-star" data-act="favcard" aria-label="收藏当前单词">★</button>
       <div class="flip" id="flip" data-act="flip">
         <div class="face front"></div>
         <div class="face back"></div>
       </div>
     </div>
-    <div class="rate">
+    <div class="rate" id="card-rate">
       <button class="ghost" data-act="grade" data-g="again">不认识</button>
       <button class="ghost" data-act="grade" data-g="vague">有点印象</button>
       <button class="primary" data-act="grade" data-g="good">认识</button>
     </div>
     <p class="tiny muted center" id="card-cat"></p>
+    <div class="row-btns center"><button class="ghost sm" data-act="favmanage">管理收藏本</button></div>
   </section>
 
   <section class="page" id="page-quiz">
-    <div class="section-title"><h2>刷题</h2><span class="hint">客观题自动判分</span></div>
+    <div class="section-title"><h2>巩固拔高</h2><span class="hint">练习与错题重写</span></div>
+    <div class="seg" id="quiz-mode"></div>
     <div class="chips" id="quiz-chips"></div>
     <p class="tiny muted" id="quiz-stat"></p>
     <div class="card pad quiz-box" id="quiz-box"></div>
@@ -84,11 +88,8 @@
     <div class="section-title"><h2>学习记录</h2><span class="hint">仅保存在本机</span></div>
     <div class="stats two" id="me-stats"></div>
 
-    <div class="section-title"><h2>收藏</h2><span class="hint">词库点 ★ 添加</span></div>
-    <div class="card pad"><div class="mini-list" id="me-fav"></div></div>
-
-    <div class="section-title"><h2>错题本</h2><span class="hint">来自练习</span></div>
-    <div class="card pad"><div class="mini-list" id="me-wrong"></div></div>
+    <div class="section-title"><h2>收藏与错题</h2><span class="hint">已分别移入对应导航</span></div>
+    <div class="card rows" id="me-shortcuts"></div>
 
     <div class="section-title"><h2>我的词库</h2><span class="hint">自定义导入</span></div>
     <div class="card pad" id="me-custom"></div>
@@ -117,13 +118,23 @@
 
 <nav class="tab" id="tabbar">
   <button data-act="nav" data-page="home" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>今日</span></button>
-  <button data-act="nav" data-page="library"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M17 7h2v13"/><path d="M8 8h6"/></svg><span>词库</span></button>
-  <button data-act="nav" data-page="cards"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="13" rx="2"/><path d="M7 4h11a2 2 0 0 1 2 2v11"/></svg><span>翻卡</span></button>
-  <button data-act="nav" data-page="quiz"><svg viewBox="0 0 24 24"><path d="M4 5h10"/><path d="M4 12h7"/><path d="M4 19h10"/><path d="M15 15l2.5 2.5L22 13"/></svg><span>刷题</span></button>
+  <button data-act="nav" data-page="library"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M17 7h2v13"/><path d="M8 8h6"/></svg><span>万词词库</span></button>
+  <button data-act="nav" data-page="cards"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="13" rx="2"/><path d="M7 4h11a2 2 0 0 1 2 2v11"/></svg><span>翻卡学习</span></button>
+  <button data-act="nav" data-page="quiz"><svg viewBox="0 0 24 24"><path d="M4 5h10"/><path d="M4 12h7"/><path d="M4 19h10"/><path d="M15 15l2.5 2.5L22 13"/></svg><span>巩固拔高</span></button>
   <button data-act="nav" data-page="me"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span>我的</span></button>
 </nav>
 
 <div class="toast" id="toast"></div>
+
+
+<div class="sheet" id="favSheet" role="dialog" aria-modal="true" aria-label="收藏本">
+  <div class="sheet-card">
+    <div class="sheet-head"><h2>收藏本 <span class="hint" id="favCount"></span></h2><button class="iconbtn" data-act="favclose" aria-label="关闭">×</button></div>
+    <p class="tiny muted">来源：万词词库 ★、错题本 ★、翻卡 ★。取消后，翻卡学习的收藏本里也会消失。</p>
+    <div class="fav-list" id="fav-list"></div>
+    <div class="row-btns end"><button class="ghost" data-act="favclose">关闭</button></div>
+  </div>
+</div>
 
 <div class="sheet" id="impSheet" role="dialog" aria-modal="true" aria-label="导入词库">
   <div class="sheet-card">

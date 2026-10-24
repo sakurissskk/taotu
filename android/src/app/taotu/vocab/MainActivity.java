@@ -110,6 +110,17 @@ public class MainActivity extends Activity {
     /** 页面配色切换时同步系统栏配色（深色页面对应深色状态栏/浅色图标）。 */
     private class Bridge {
         @JavascriptInterface
+        public int getBattery() {
+            try {
+                android.os.BatteryManager bm = (android.os.BatteryManager) getSystemService(BATTERY_SERVICE);
+                int p = bm.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY);
+                return p > 0 ? p : -1;
+            } catch (Exception e) {
+                return -1;
+            }
+        }
+
+        @JavascriptInterface
         public void setDark(final boolean dark) {
             runOnUiThread(new Runnable() {
                 @Override
